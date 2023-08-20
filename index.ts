@@ -26,7 +26,7 @@ class Database {
   }) {
     const updateChecker = new UpdateChecker();
 
-    const { adaptor, path, disableCheckUpdates } = options || {};
+    const { adaptor, path, disableCheckUpdates, createConfig } = options || {};
     if (!adaptor) {
       throw new ElegantError({
         expected: "adaptor",
@@ -44,7 +44,10 @@ class Database {
     if (disableCheckUpdates === false) {
       new UpdateChecker().checkUpdates();
     }
-
+    /*
+    /*if (createConfig === true) {
+      fs.createFile("./")
+    }*/
    // this.emitter = new EventEmitter();
     this.path = path || './elegant.json'; // @ts-ignore
     this.database = new adaptor({ path: path });
