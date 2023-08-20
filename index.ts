@@ -26,7 +26,7 @@ class Database {
   }) {
     const updateChecker = new UpdateChecker();
 
-    const { adaptor, path, disableCheckUpdates, createConfig } = options || {};
+    const { adaptor, path, disableCheckUpdates } = options || {};
     if (!adaptor) {
       throw new ElegantError({
         expected: "adaptor",
