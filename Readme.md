@@ -1,11 +1,8 @@
 [![Node.js Package](https://github.com/Nicat-dcw/elegantdb/actions/workflows/npm-publish.yml/badge.svg?event=create)](https://github.com/Nicat-dcw/elegantdb/actions/workflows/npm-publish.yml)
-<<<<<<< HEAD
 [![Socket.dev](https://socket.dev/api/badge/npm/package/elegant)]()
 [![CodeQL](https://github.com/Nicat-dcw/elegantdb/actions/workflows/codeql.yml/badge.svg?event=watch)](https://github.com/Nicat-dcw/elegantdb/actions/workflows/codeql.yml)
 [![NPM](https://img.shields.io/npm/v/elegantdb)]()
 
-=======
->>>>>>> af00de157166ae9d67a78f30a6655534cd2c01fb
 # Elegant Database
 
 Elegant Database is a JavaScript library that provides advanced features for managing and interacting with a database. It supports both JSON and Elegant (Custom Adaptor of ElegantDB) adaptors for storage.
