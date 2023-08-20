@@ -1,4 +1,4 @@
-
+[![Node.js Package](https://github.com/Nicat-dcw/elegantdb/actions/workflows/npm-publish.yml/badge.svg?event=create)](https://github.com/Nicat-dcw/elegantdb/actions/workflows/npm-publish.yml)
 # Elegant Database
 
 Elegant Database is a JavaScript library that provides advanced features for managing and interacting with a database. It supports both JSON and Elegant (Custom Adaptor of ElegantDB) adaptors for storage.
