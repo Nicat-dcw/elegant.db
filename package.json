@@ -1,0 +1,65 @@
+{
+  "name": "elegantdb",
+  "version": "1.0.0",
+  "description": "✨ Faster and Useful Database and Database Group.",
+  "main": "./dist/cjs/index.js",
+  "module": "./dist/esm/index.js",
+  "files": [
+    "dist/"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nicat-dcw/elegant.db"
+  },
+  "scripts": {
+    "test": "npx jest",
+    "build": "npx tsc -p tsconfig.json && npx tsc -p tsconfig.json",
+    "prepublishOnly": "npm run build"
+  },
+  "exports": {
+    ".": {
+      "require": "*",
+      "import": "index.mjs"
+    },
+    "/emitter": "@elegantdb/events",
+    "/error": "./src/elegantdb/managers/error.mjs"
+  },
+  "keywords": [
+    "elegant",
+    "quick.db",
+    "wio.db",
+    "json",
+    "database",
+    "mongoose",
+    "quickmongo",
+    "easy",
+    "nodejs database",
+    "mongoose database",
+    "json database",
+    "redis database",
+    "redis",
+    "croxydb",
+    "hyprdb",
+    "yaml",
+    "yaml database"
+  ],
+  "author": [
+    "Nicat-dcw"
+  ],
+  "homepage": "https://github.com/Nicat-dcw/elegant.db#readme",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "@types/node": "^16.7.1",
+    "colorette": "^2.0.20",
+    "fs-extra": "^11.1.1",
+    "yaml": "^1.10.2"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@elegantdb/events": "^1.0.1",
+    "@types/fs-extra": "^11.0.1",
+    "typescript": "^5.1.6"
+  }
+}

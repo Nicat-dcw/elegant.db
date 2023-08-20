@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "ES2021",
+    "module": "Commonjs",
+    "strict": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "./dist/esm",
+  //  "allowImportingTsExtensions": true
+    "moduleResolution": "node",
+  },
+  "include": [
+    "./"
+  ]
+}
