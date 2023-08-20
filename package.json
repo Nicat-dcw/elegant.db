@@ -61,5 +61,8 @@
     "@elegantdb/events": "^1.0.1",
     "@types/fs-extra": "^11.0.1",
     "typescript": "^5.1.6"
+  },
+  "engines": {
+    "node": ">=16.0.0"
   }
 }
