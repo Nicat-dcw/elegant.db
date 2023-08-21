@@ -7,8 +7,13 @@ import UpdateChecker from './src/elegant/managers/updater';
  * Represents a database with advanced features.
  */
 class Database {
+  
+  private elegant: {
+    cache: Map<any, any>;
+  };
   private path: string;
   private database: JSONAdaptor | ElegantAdaptor;
+  private useExperimentalCaches?: boolean;
   //private emitter: EventEmitter;
 
   /**
@@ -22,11 +27,13 @@ class Database {
   constructor(options: {
     adaptor: JSONAdaptor | ElegantAdaptor;
     path?: string;
+    elegant?: object;
     disableCheckUpdates?: boolean;
+    useExperimentalCaches?: boolean;
   }) {
     const updateChecker = new UpdateChecker();
 
-    const { adaptor, path, disableCheckUpdates } = options || {};
+    const { useExperimentalCaches, adaptor, path, disableCheckUpdates } = options || {};
     if (!adaptor) {
       throw new ElegantError({
         expected: "adaptor",
@@ -44,15 +51,19 @@ class Database {
     if (disableCheckUpdates === false) {
       new UpdateChecker().checkUpdates();
     }
-    /*
-    /*if (createConfig === true) {
-      fs.createFile("./")
-    }*/
-   // this.emitter = new EventEmitter();
+    this.elegant = {
+      cache: new Map()
+    }
     this.path = path || './elegant.json'; // @ts-ignore
-    this.database = new adaptor({ path: path });
+    /*if(useExperimentalCaches === true) {
+      this.database = new adaptor({ path: path, cache: this.elegant.cache });
+    } else {
+      this.database = new adaptor({ path: path }); // @ts-ignore
+    }*/
+    // @ts-ignore
+    this.database = new adaptor({ path: path, cache: useExperimentalCaches ?? false });
   }
-
+ 
   /**
    * Sets a value in the database.
    * @param {string} key - The key to set.
@@ -66,6 +77,7 @@ class Database {
       });
     }
     //this.emitter.emit("dataset", { key: key, value: value, adaptor: this.database.adaptor() });
+    this.elegant.cache.set(key,value)
     this.database.set(key, value);
   }
 
@@ -98,7 +110,7 @@ class Database {
       });
     }
     //this.emitter.emit("dataget", { key, value: this.database.get(key) });
-    return this.database.get(key);
+    return this.elegant.cache.get(key);
   }
 
   /**
@@ -129,7 +141,8 @@ class Database {
       });
     }
     //this.emitter.emit("dataremove", { key });
-    this.database.remove(key);
+    this.elegant.cache.delete(key);
+    return this.database.remove(key)
   }
 
   /**
@@ -139,6 +152,33 @@ class Database {
   clone(): JSONAdaptor | ElegantAdaptor {
     //this.emitter.emit("clone", { dbPath: this.path });
     return this.database.clone(this.path);
+  }
+  /**
+   * Get All Database values and keys
+   * @returns {Object}
+   * @readonly
+   * 
+   */
+  async all(): Promise <any> {
+    const data = await this.database.all()
+    console.log(data)
+    for (const [key, value] of data) {
+      return { key, value }
+    }
+  }
+  /**
+   * Get All Cache
+   * @returns {Object} data of cache
+   * @readonly
+  */
+  getCache(): any {
+    const cache = this.elegant.cache;
+    for (const [key, value] of cache) {
+      return {
+        key: key,
+        value: value
+      }
+    }
   }
 }
 

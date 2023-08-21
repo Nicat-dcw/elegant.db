@@ -39,9 +39,10 @@ class JSONAdaptor {
      * @param {string} options.path - The path to the JSON data file.
      */
     constructor(options) {
-        const { path } = options;
+        const { path, cache } = options;
         this.path = path || "./elegant.json";
         this.data = {};
+        this.cache = cache ?? {};
         // Load data from file if it exists
         this.loadData();
     }
@@ -108,6 +109,15 @@ class JSONAdaptor {
         clonedAdaptor.data = { ...this.data };
         return clonedAdaptor;
     }
+    async all() {
+        try {
+            const data = await fs.readFile(this.path, 'utf-8');
+            return data;
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
     /**
      * Loads data from the file.
      * @private
@@ -118,15 +128,17 @@ class JSONAdaptor {
                 this.data = {};
                 return;
             }
+            const cachedData = this.cache;
             const data = await fs.readFile(this.path, 'utf-8');
-            this.data = JSON.parse(data);
-            // console.log('Data loaded successfully.');
+            if (this.cache) {
+                this.cache = cachedData;
+            }
+            else {
+                this.data = JSON.parse(data);
+            }
         }
         catch (error) {
-            throw new error_1.default({
-                expected: typeof error,
-                message: error instanceof Error ? error.message : String(error)
-            });
+            console.error('Error loading data:', error);
         }
     }
     /**
@@ -135,14 +147,15 @@ class JSONAdaptor {
      */
     async saveData() {
         try {
-            await fs.writeFile(this.path, JSON.stringify(this.data, null, 4), 'utf-8');
-            //  console.log('Data saved successfully.');
+            if (this.cache) {
+                await fs.writeFile(this.path, JSON.stringify(this.cache, null, 2), 'utf-8');
+            }
+            else {
+                await fs.writeFile(this.path, JSON.stringify(this.data, null, 2), 'utf-8');
+            }
         }
         catch (error) {
-            throw new error_1.default({
-                expected: typeof error,
-                message: error instanceof Error ? error.message : String(error)
-            });
+            console.error('Error saving data:', error);
         }
     }
     /**

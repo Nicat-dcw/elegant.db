@@ -39,9 +39,10 @@ class ElegantAdaptor {
      * @param {string} options.path - The path to the JSON data file.
      */
     constructor(options) {
-        const { path } = options;
+        const { path, cache } = options;
         this.path = path || "./database.elegant";
         this.data = {};
+        this.cache = cache ?? {};
         // Load data from file if it exists
         this.loadData();
     }
@@ -108,6 +109,15 @@ class ElegantAdaptor {
         clonedAdaptor.data = { ...this.data };
         return clonedAdaptor;
     }
+    async all() {
+        try {
+            const data = await this.loadData();
+            return data;
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
     /**
      * Loads data from the file.
      * @private
@@ -118,7 +128,10 @@ class ElegantAdaptor {
                 this.data = {};
                 return;
             }
+            const cachedData = this.cache;
             const data = await fs.readFile(this.path, 'utf-8');
+            if (this.cache)
+                return void 0;
             this.data = JSON.parse(data);
         }
         catch (error) {
@@ -131,7 +144,12 @@ class ElegantAdaptor {
      */
     async saveData() {
         try {
-            await fs.writeFile(this.path, JSON.stringify(this.data, null, 2), 'utf-8');
+            if (this.cache) {
+                await fs.writeFile(this.path, JSON.stringify(this.cache, null, 2), 'utf-8');
+            }
+            else {
+                await fs.writeFile(this.path, JSON.stringify(this.data, null, 2), 'utf-8');
+            }
         }
         catch (error) {
             console.error('Error saving data:', error);

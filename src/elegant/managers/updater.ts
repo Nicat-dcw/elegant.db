@@ -25,7 +25,7 @@ static version: string = "1.0.0";
    */
   private async fetchLatestModuleVersion(): Promise<string | null> {
     try {
-      const response = await fetch('https://registry.npmjs.org/@elegantdb/events');
+      const response = await fetch('https://registry.npmjs.org/elegantdb');
       const module = await response.json();
       return module['dist-tags'].latest;
     } catch (error) {
@@ -93,7 +93,7 @@ static version: string = "1.0.0";
       this.notified = true;
     }
 
-    const message = `New ${yellow(type)} version available: ${red(current)} > ${red(latest)}`;
+    const message = `${bgMagenta("[ELEGANTDB]")} New ${yellow(type)} version available: ${red(current)} > ${red(latest)}`;
 
     console.info((message));
     return true;

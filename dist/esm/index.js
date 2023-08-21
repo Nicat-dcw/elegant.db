@@ -25,7 +25,7 @@ class Database {
      */
     constructor(options) {
         const updateChecker = new updater_1.default();
-        const { adaptor, path, disableCheckUpdates } = options || {};
+        const { useExperimentalCaches, adaptor, path, disableCheckUpdates } = options || {};
         if (!adaptor) {
             throw new error_1.default({
                 expected: "adaptor",
@@ -41,9 +41,17 @@ class Database {
         if (disableCheckUpdates === false) {
             new updater_1.default().checkUpdates();
         }
-        // this.emitter = new EventEmitter();
+        this.elegant = {
+            cache: new Map()
+        };
         this.path = path || './elegant.json'; // @ts-ignore
-        this.database = new adaptor({ path: path });
+        /*if(useExperimentalCaches === true) {
+          this.database = new adaptor({ path: path, cache: this.elegant.cache });
+        } else {
+          this.database = new adaptor({ path: path }); // @ts-ignore
+        }*/
+        // @ts-ignore
+        this.database = new adaptor({ path: path, cache: useExperimentalCaches ?? false });
     }
     /**
      * Sets a value in the database.
@@ -58,6 +66,7 @@ class Database {
             });
         }
         //this.emitter.emit("dataset", { key: key, value: value, adaptor: this.database.adaptor() });
+        this.elegant.cache.set(key, value);
         this.database.set(key, value);
     }
     /**
@@ -88,7 +97,7 @@ class Database {
             });
         }
         //this.emitter.emit("dataget", { key, value: this.database.get(key) });
-        return this.database.get(key);
+        return this.elegant.cache.get(key);
     }
     /**
      * Checks if a key exists in the database.
@@ -117,7 +126,8 @@ class Database {
             });
         }
         //this.emitter.emit("dataremove", { key });
-        this.database.remove(key);
+        this.elegant.cache.delete(key);
+        return this.database.remove(key);
     }
     /**
      * Creates a clone of the database instance.
@@ -126,6 +136,33 @@ class Database {
     clone() {
         //this.emitter.emit("clone", { dbPath: this.path });
         return this.database.clone(this.path);
+    }
+    /**
+     * Get All Database values and keys
+     * @returns {Object}
+     * @readonly
+     *
+     */
+    async all() {
+        const data = await this.database.all();
+        console.log(data);
+        for (const [key, value] of data) {
+            return { key, value };
+        }
+    }
+    /**
+     * Get All Cache
+     * @returns {Object} data of cache
+     * @readonly
+    */
+    getCache() {
+        const cache = this.elegant.cache;
+        for (const [key, value] of cache) {
+            return {
+                key: key,
+                value: value
+            };
+        }
     }
 }
 exports.Database = Database;

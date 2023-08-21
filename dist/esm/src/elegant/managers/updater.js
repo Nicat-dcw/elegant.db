@@ -17,7 +17,7 @@ class UpdateChecker {
      */
     async fetchLatestModuleVersion() {
         try {
-            const response = await fetch('https://registry.npmjs.org/@elegantdb/events');
+            const response = await fetch('https://registry.npmjs.org/elegantdb');
             const module = await response.json();
             return module['dist-tags'].latest;
         }
@@ -80,7 +80,7 @@ class UpdateChecker {
             //  color = green
             this.notified = true;
         }
-        const message = `New ${(0, colorette_1.yellow)(type)} version available: ${(0, colorette_1.red)(current)} > ${(0, colorette_1.red)(latest)}`;
+        const message = `${(0, colorette_1.bgMagenta)("[ELEGANTDB]")} New ${(0, colorette_1.yellow)(type)} version available: ${(0, colorette_1.red)(current)} > ${(0, colorette_1.red)(latest)}`;
         console.info((message));
         return true;
     }

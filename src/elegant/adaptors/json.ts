@@ -4,20 +4,22 @@ import ElegantError from '../managers/error'
 /**
  * Represents a JSON Adaptor for storing data using fs-extra.
  */
+ 
 class JSONAdaptor {
   private path: string;
   private data: { [key: string]: any };
-
+  private cache: any;
   /**
    * Creates a new instance of the JSON class.
    * @param {Object} options - The options for the adaptor.
    * @param {string} options.path - The path to the JSON data file.
    */
-  constructor(options: { path: string }) {
-    const { path } = options;
+  constructor(options: { path: string, cache?: any }) {
+    const { path, cache } = options;
     this.path = path || "./elegant.json";
     this.data = {};
-
+    this.cache = cache ?? {};
+    
     // Load data from file if it exists
     this.loadData();
   }
@@ -90,7 +92,16 @@ class JSONAdaptor {
     clonedAdaptor.data = { ...this.data };
     return clonedAdaptor;
   }
-
+  
+ async all(): Promise<any> {
+    try {
+      const data = await fs.readFile(this.path, 'utf-8');
+      return data;
+    } catch (err) {
+      console.error(err)
+    }
+ }
+ 
   /**
    * Loads data from the file.
    * @private
@@ -101,15 +112,15 @@ class JSONAdaptor {
         this.data = {};
         return;
       }
-
+      const cachedData = this.cache;
       const data = await fs.readFile(this.path, 'utf-8');
+      if(this.cache) { 
+        this.cache = cachedData;
+      } else {
       this.data = JSON.parse(data);
-      // console.log('Data loaded successfully.');
+      }
     } catch (error) {
-      throw new ElegantError({
-        expected: typeof error,
-        message: error instanceof Error ? error.message : String(error)
-      });
+      console.error('Error loading data:', error);
     }
   }
 
@@ -119,13 +130,13 @@ class JSONAdaptor {
    */
   private async saveData(): Promise<void> {
     try {
-      await fs.writeFile(this.path, JSON.stringify(this.data, null, 4), 'utf-8');
-      //  console.log('Data saved successfully.');
+     if(this.cache) {
+       await fs.writeFile(this.path, JSON.stringify(this.cache, null, 2), 'utf-8');
+     } else {
+       await fs.writeFile(this.path, JSON.stringify(this.data, null, 2), 'utf-8');
+     }
     } catch (error) {
-      throw new ElegantError({
-        expected: typeof error,
-        message: error instanceof Error ? error.message : String(error)
-      });
+      console.error('Error saving data:', error);
     }
   }
 
