@@ -30,6 +30,7 @@ const db = new Database({
   adaptor: new JSONAdaptor(), // or new ElegantAdaptor()
   path: './my-database.json', // Optional, specify the path
   disableCheckUpdates: false, // Optional, disable update checks
+  useExperimentalCaches: false // Optional
 });
 ```
 
@@ -44,6 +45,8 @@ const db = new Database({
 - `has(key)`: Check if a key exists in the database.
 - `remove(key)`: Remove a key from the database.
 - `clone()`: Create a clone of the database instance.
+- `all()`: Get All Data from Adaptor.
+- `getCache()`: Get All Cache from Database
 
 ## Contributing
 
