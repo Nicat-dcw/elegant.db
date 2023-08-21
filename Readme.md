@@ -1,6 +1,6 @@
-[![Node.js Package](https://github.com/Nicat-dcw/elegantdb/actions/workflows/npm-publish.yml/badge.svg?event=publish)](https://github.com/Nicat-dcw/elegantdb/actions/workflows/npm-publish.yml)
-[![Socket.dev](https://socket.dev/api/badge/npm/package/elegant)](https://socket.dev/npm/elegantdb/issues)
-[![CodeQL](https://github.com/Nicat-dcw/elegantdb/actions/workflows/codeql.yml/badge.svg)](https://github.com/Nicat-dcw/elegantdb/actions/workflows/codeql.yml)
+[![Node.js Package](https://github.com/Nicat-dcw/elegant.db/actions/workflows/npm-publish.yml/badge.svg?event=publish)](https://github.com/Nicat-dcw/elegant.db/actions/workflows/npm-publish.yml)
+[![Socket.dev](https://socket.dev/api/badge/npm/package/elegantdb)](https://socket.dev/npm/elegantdb/issues)
+[![CodeQL](https://github.com/Nicat-dcw/elegant.db/actions/workflows/codeql.yml/badge.svg)](https://github.com/Nicat-dcw/elegant.db/actions/workflows/codeql.yml)
 [![NPM](https://img.shields.io/npm/v/elegantdb)]()
 
 # Elegant Database
