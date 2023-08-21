@@ -1,4 +1,4 @@
-[![Node.js Package](https://github.com/Nicat-dcw/elegant.db/actions/workflows/npm-publish.yml/badge.svg?event=published)](https://github.com/Nicat-dcw/elegant.db/actions/workflows/npm-publish.yml)
+[![Node.js Package](https://github.com/Nicat-dcw/elegant.db/actions/workflows/npm-publish.yml/badge.svg?event=default)](https://github.com/Nicat-dcw/elegant.db/actions/workflows/npm-publish.yml)
 [![Socket.dev](https://socket.dev/api/badge/npm/package/elegantdb)](https://socket.dev/npm/elegantdb/issues)
 [![CodeQL](https://github.com/Nicat-dcw/elegant.db/actions/workflows/codeql.yml/badge.svg)](https://github.com/Nicat-dcw/elegant.db/actions/workflows/codeql.yml)
 [![NPM](https://img.shields.io/npm/v/elegantdb)]()
