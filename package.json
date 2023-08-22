@@ -1,6 +1,6 @@
 {
   "name": "elegantdb",
-  "version": "1.0.3",
+  "version": "2.0.0",
   "description": "✨ Faster and Useful Database and Database Group.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
@@ -33,9 +33,7 @@
     "quickmongo",
     "easy",
     "nodejs database",
-    "mongoose database",
     "json database",
-    "redis database",
     "redis",
     "croxydb",
     "hyprdb",
@@ -50,10 +48,7 @@
   "dependencies": {
     "@types/node": "^16.7.1",
     "colorette": "^2.0.20",
-    "fs-extra": "^11.1.1",
-    "graceful-fs": "^4.2.11",
-    "quick.db": "^9.1.7",
-    "yaml": "^1.10.2"
+    "graceful-fs": "^4.2.11"
   },
   "publishConfig": {
     "access": "public"
