@@ -28,6 +28,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.JSONAdaptor = void 0;
 const fs = __importStar(require("node:fs/promises"));
+const graceful_fs_1 = require("graceful-fs");
 const error_1 = __importDefault(require("../managers/error"));
 /**
  * Represents a JSON Adaptor for storing data using fs-extra.
@@ -42,7 +43,7 @@ class JSONAdaptor {
         const { path, cache } = options;
         this.path = path || "./elegant.json";
         this.data = {};
-        this.cache = cache ?? {};
+        this.cache = cache ?? false;
         // Load data from file if it exists
         this.loadData();
     }
@@ -124,10 +125,10 @@ class JSONAdaptor {
      */
     async loadData() {
         try {
-            if (!(await fs.access(this.path).catch(() => false))) {
-                this.data = {};
-                return;
-            }
+            /*if (!(await fs.access(this.path).catch(() => false))) {
+              this.data = {};
+              return;
+            }*/
             const cachedData = this.cache;
             const data = await fs.readFile(this.path, 'utf-8');
             if (this.cache) {
@@ -148,10 +149,13 @@ class JSONAdaptor {
     async saveData() {
         try {
             if (this.cache) {
-                await fs.writeFile(this.path, JSON.stringify(this.cache, null, 2), 'utf-8');
+                const dataToWrite = JSON.stringify(this.cache, null, 2);
+                await fs.writeFile(this.path, dataToWrite, 'utf-8');
             }
             else {
-                await fs.writeFile(this.path, JSON.stringify(this.data, null, 2), 'utf-8');
+                const writter = await (0, graceful_fs_1.createWriteStream)(this.path);
+                writter.write(JSON.stringify(this.data, null, 2), 'utf-8');
+                writter.end();
             }
         }
         catch (error) {

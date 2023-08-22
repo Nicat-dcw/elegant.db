@@ -1,4 +1,5 @@
 import * as fs from 'node:fs/promises';
+import { createWriteStream } from 'graceful-fs'
 import ElegantError from '../managers/error'
 
 /**
@@ -18,7 +19,7 @@ class JSONAdaptor {
     const { path, cache } = options;
     this.path = path || "./elegant.json";
     this.data = {};
-    this.cache = cache ?? {};
+    this.cache = cache ?? false;
     
     // Load data from file if it exists
     this.loadData();
@@ -102,16 +103,18 @@ class JSONAdaptor {
     }
  }
  
+
+ 
   /**
    * Loads data from the file.
    * @private
    */
   private async loadData(): Promise<void> {
     try {
-      if (!(await fs.access(this.path).catch(() => false))) {
+      /*if (!(await fs.access(this.path).catch(() => false))) {
         this.data = {};
         return;
-      }
+      }*/
       const cachedData = this.cache;
       const data = await fs.readFile(this.path, 'utf-8');
       if(this.cache) { 
@@ -123,7 +126,7 @@ class JSONAdaptor {
       console.error('Error loading data:', error);
     }
   }
-
+  
   /**
    * Saves data to the file.
    * @private
@@ -131,9 +134,13 @@ class JSONAdaptor {
   private async saveData(): Promise<void> {
     try {
      if(this.cache) {
-       await fs.writeFile(this.path, JSON.stringify(this.cache, null, 2), 'utf-8');
+       const dataToWrite = JSON.stringify(this.cache, null, 2);
+
+        await fs.writeFile(this.path, dataToWrite, 'utf-8');
      } else {
-       await fs.writeFile(this.path, JSON.stringify(this.data, null, 2), 'utf-8');
+       const writter = await createWriteStream(this.path); 
+       writter.write(JSON.stringify(this.data, null, 2), 'utf-8')
+       writter.end()
      }
     } catch (error) {
       console.error('Error saving data:', error);

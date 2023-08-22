@@ -1,6 +1,5 @@
 import { JSONAdaptor, ElegantAdaptor } from './src/elegant/index';
 import ElegantError from './src/elegant/managers/error';
-import UpdateChecker from './src/elegant/managers/updater';
 //import EventEmitter from '@elegantdb/events';
 
 /**
@@ -31,7 +30,7 @@ class Database {
     disableCheckUpdates?: boolean;
     useExperimentalCaches?: boolean;
   }) {
-    const updateChecker = new UpdateChecker();
+  //  const updateChecker = new UpdateChecker();
 
     const { useExperimentalCaches, adaptor, path, disableCheckUpdates } = options || {};
     if (!adaptor) {
@@ -49,7 +48,7 @@ class Database {
     }
 
     if (disableCheckUpdates === false) {
-      new UpdateChecker().checkUpdates();
+    //  new UpdateChecker().checkUpdates();
     }
     this.elegant = {
       cache: new Map()
@@ -144,7 +143,27 @@ class Database {
     this.elegant.cache.delete(key);
     return this.database.remove(key)
   }
+  
+ /**
+  * Transfers Another Database values to ElegantDB
+  * @params {object} database database
+  * @example <db>.transfer(<otherdb>.all(), (data) => { console.log(data) })
+ */
+ transfer(database: { [key: string]: any }, callback?: (result: string) => void): void {
+    if (typeof database !== "object") {
+        throw new ElegantError({ expected: 'object', message: 'Input database must be an object.' });
+    }
 
+    for (const key in database) {
+        const value = database[key];
+        this.set(key, value);
+    }
+
+    if (typeof callback === 'function') {
+        callback('success');
+    }
+}
+  
   /**
    * Creates a clone of the database instance.
    * @returns {Object} A new instance of the database.

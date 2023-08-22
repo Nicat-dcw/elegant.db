@@ -13,7 +13,7 @@ class ElegantError extends Error {
     const errorMessage = bold(bgMagenta(whiteBright("ElegantError:"))) + yellow(` ${message}`);
 
     super(errorMessage); // Pass the error message directly to the super constructor
-    this.name = "ElegantError"; // Assign a name to the error
+    this.name = ""; // Assign a name to the error
     this.date = new Date().getTime();
     this.expected = expected;
   }

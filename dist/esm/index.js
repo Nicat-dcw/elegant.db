@@ -8,7 +8,6 @@ const index_1 = require("./src/elegant/index");
 Object.defineProperty(exports, "JSONAdaptor", { enumerable: true, get: function () { return index_1.JSONAdaptor; } });
 Object.defineProperty(exports, "ElegantAdaptor", { enumerable: true, get: function () { return index_1.ElegantAdaptor; } });
 const error_1 = __importDefault(require("./src/elegant/managers/error"));
-const updater_1 = __importDefault(require("./src/elegant/managers/updater"));
 //import EventEmitter from '@elegantdb/events';
 /**
  * Represents a database with advanced features.
@@ -24,7 +23,7 @@ class Database {
      * @private
      */
     constructor(options) {
-        const updateChecker = new updater_1.default();
+        //  const updateChecker = new UpdateChecker();
         const { useExperimentalCaches, adaptor, path, disableCheckUpdates } = options || {};
         if (!adaptor) {
             throw new error_1.default({
@@ -39,7 +38,7 @@ class Database {
             });
         }
         if (disableCheckUpdates === false) {
-            new updater_1.default().checkUpdates();
+            //  new UpdateChecker().checkUpdates();
         }
         this.elegant = {
             cache: new Map()
@@ -128,6 +127,23 @@ class Database {
         //this.emitter.emit("dataremove", { key });
         this.elegant.cache.delete(key);
         return this.database.remove(key);
+    }
+    /**
+     * Transfers Another Database values to ElegantDB
+     * @params {object} database database
+     * @example <db>.transfer(<otherdb>.all(), (data) => { console.log(data) })
+    */
+    transfer(database, callback) {
+        if (typeof database !== "object") {
+            throw new error_1.default({ expected: 'object', message: 'Input database must be an object.' });
+        }
+        for (const key in database) {
+            const value = database[key];
+            this.set(key, value);
+        }
+        if (typeof callback === 'function') {
+            callback('success');
+        }
     }
     /**
      * Creates a clone of the database instance.
