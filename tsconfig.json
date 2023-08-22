@@ -9,8 +9,5 @@
     "outDir": "./dist/esm",
     "moduleResolution": "node",
   },
-  "include": [
-    "./"
-  ],
   "exclude": ["node_modules", "build"],
 }
