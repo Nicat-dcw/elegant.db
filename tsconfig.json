@@ -5,8 +5,8 @@
     "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "rootDir": "./src",
     "outDir": "./dist/esm",
-  //  "allowImportingTsExtensions": true
     "moduleResolution": "node",
   },
   "include": [
