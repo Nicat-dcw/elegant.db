@@ -2,8 +2,8 @@
   "name": "elegantdb",
   "version": "2.0.2",
   "description": "✨ Faster and Useful Database and Database Group.",
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
+  "main": "./dist/src/index.js",
+  "module": "./dist/src/index.js",
   "files": [
     "dist/"
   ],
@@ -17,8 +17,8 @@
   },
   "exports": {
     ".": {
-      "require": "./dist/index.js",
-      "import": "./dist/index.js"
+      "require": "./dist/src/index.js",
+      "import": "./dist/src/index.js"
     },
     "/emitter": "@elegantdb/events",
     "/error": "./src/elegantdb/managers/error.mjs"
