@@ -5,7 +5,7 @@
     "moduleDetection": "auto",
     "moduleResolution": "Node",
     "sourceMap": true,
-    "rootDir": "./src",
+    "rootDir": "./",
     "outDir": "./dist",
     "removeComments": false,
     "esModuleInterop": true,
