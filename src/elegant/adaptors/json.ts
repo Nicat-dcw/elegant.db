@@ -152,7 +152,7 @@ class JSONAdaptor {
      if(this.cache) {
        const dataToWrite = JSON.stringify(this.cache, null, 2);
 
-        await fs.writeFileSync(this.path, dataToWrite, 'utf-8');
+        await fs.writeFile(this.path, dataToWrite, 'utf-8');
      } else {
        const writter = await createWriteStream(this.path); 
        writter.write(JSON.stringify(this.data, null, 2), 'utf-8')

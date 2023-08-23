@@ -80,6 +80,22 @@ class ElegantAdaptor {
   }
 
   /**
+   * Pushes a value or an array of values to an array in the data and saves it to the file.
+   * @param {string} key - The key of the array.
+   * @param {*} value - The value(s) to push to the array.
+   */
+  push(key: string, value: any): void {
+    if (!Array.isArray(this.data[key])) {
+      this.data[key] = [];
+    }
+
+    const valuesToAdd = Array.isArray(value) ? value : [value];
+
+    this.data[key].push(...valuesToAdd);
+    this.saveData();
+  }
+
+  /**
    * Creates a clone of the JSON instance.
    * @param {string} path - The path for the cloned instance's data file.
    * @returns {ElegantAdaptor} A new instance of the JSON.
