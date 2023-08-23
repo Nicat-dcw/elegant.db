@@ -1,9 +1,9 @@
 {
   "name": "elegantdb",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "✨ Faster and Useful Database and Database Group.",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "files": [
     "dist/"
   ],
@@ -40,19 +40,17 @@
     "yaml",
     "yaml database"
   ],
-  "author": [
-    "Nicat-dcw"
-  ],
-  "homepage": "https://github.com/Nicat-dcw/elegant.db#readme",
-  "url": "",
   "author": {
     "Nicat-dcw": "github://Nicat-dcw"
   },
+  "homepage": "https://github.com/Nicat-dcw/elegant.db#readme",
+  "url": "",
   "license": "ISC",
   "dependencies": {
-    "@types/node": "^16.7.1",
+    "@types/node": "^20.5.3",
     "colorette": "^2.0.20",
-    "graceful-fs": "^4.2.11"
+    "graceful-fs": "^4.2.11",
+    "typescript": "^5.1.6"
   },
   "publishConfig": {
     "access": "public"
@@ -60,8 +58,7 @@
   "devDependencies": {
     "@elegantdb/events": "^1.0.1",
     "@types/fs-extra": "^11.0.1",
-    "@types/graceful-fs": "^4.1.6",
-    "typescript": "^5.1.6"
+    "@types/graceful-fs": "^4.1.6"
   },
   "engines": {
     "node": ">=16.0.0"

@@ -6,5 +6,5 @@ db.on("dataset", (i) => console.log(i))
 console.log(db.has("hi"))*/
 
 test('Set a variable with key to database', () => {
-  expect(db.set("hi", "Welcome"))
+  expect(db.push("hi", { array: true }))
 })

@@ -5,8 +5,8 @@
     "moduleDetection": "auto",
     "moduleResolution": "Node",
     "sourceMap": true,
-    "rootDir": "./",
-    "outDir": "./src",
+    "rootDir": "./src",
+    "outDir": "./dist",
     "removeComments": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -23,6 +23,7 @@
   "exclude": [
     "node_modules",
     "src",
+    "index",
     "tests"
   ]
 }

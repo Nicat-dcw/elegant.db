@@ -1,5 +1,5 @@
-import { JSONAdaptor, ElegantAdaptor } from './src/elegant/index';
-import ElegantError from './src/elegant/managers/error';
+import { JSONAdaptor, ElegantAdaptor } from './elegant/index';
+import ElegantError from './elegant/managers/error';
 //import EventEmitter from '@elegantdb/events';
 
 /**
