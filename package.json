@@ -1,7 +1,7 @@
 {
   "name": "elegantdb",
-  "version": "2.0.0",
-  "description": "✨ 🆙Faster and Useful Database and Database Group.",
+  "version": "2.0.1",
+  "description": "✨ Faster and Useful Database and Database Group.",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "files": [
@@ -44,6 +44,10 @@
     "Nicat-dcw"
   ],
   "homepage": "https://github.com/Nicat-dcw/elegant.db#readme",
+  "url": "",
+  "author": {
+    "Nicat-dcw": "github://Nicat-dcw"
+  },
   "license": "ISC",
   "dependencies": {
     "@types/node": "^16.7.1",

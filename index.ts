@@ -143,7 +143,16 @@ class Database {
     this.elegant.cache.delete(key);
     return this.database.remove(key)
   }
-  
+ 
+ /**
+   * Pushes a value or an array of values to an array in the data and saves it to the file.
+   * @param {string} key - The key of the array.
+   * @param {*} value - The value(s) to push to the array.
+  */
+  push(key: string, value: any): void {
+    this.database.push(key, value)
+  }
+
  /**
   * Transfers Another Database values to ElegantDB
   * @params {object} database database
@@ -160,7 +169,7 @@ class Database {
     }
 
     if (typeof callback === 'function') {
-        callback('success');
+        callback('transfered successfully!');
     }
 }
   

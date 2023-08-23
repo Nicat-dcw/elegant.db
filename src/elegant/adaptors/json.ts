@@ -82,6 +82,22 @@ class JSONAdaptor {
       this.saveData();
     }
   }
+ 
+  /**
+   * Pushes a value or an array of values to an array in the data and saves it to the file.
+   * @param {string} key - The key of the array.
+   * @param {*} value - The value(s) to push to the array.
+   */
+  push(key: string, value: any): void {
+    if (!Array.isArray(this.data[key])) {
+      this.data[key] = [];
+    }
+
+    const valuesToAdd = Array.isArray(value) ? value : [value];
+
+    this.data[key].push(...valuesToAdd);
+    this.saveData();
+  }
 
   /**
    * Creates a clone of the JSON instance.
@@ -136,7 +152,7 @@ class JSONAdaptor {
      if(this.cache) {
        const dataToWrite = JSON.stringify(this.cache, null, 2);
 
-        await fs.writeFile(this.path, dataToWrite, 'utf-8');
+        await fs.writeFileSync(this.path, dataToWrite, 'utf-8');
      } else {
        const writter = await createWriteStream(this.path); 
        writter.write(JSON.stringify(this.data, null, 2), 'utf-8')
