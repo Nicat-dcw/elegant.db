@@ -1,4 +1,4 @@
-const { Database, JSONAdaptor } = require("./dist/index.js");
+const { Database, JSONAdaptor } = require("./dist/src/index.js");
 //const { QuickDB } = require("quick.db");
 
 const db = new Database({ adaptor: JSONAdaptor, path: "", disableCheckUpdates: false, useExperimentalCaches: false });

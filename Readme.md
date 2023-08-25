@@ -2,6 +2,7 @@
 [![Socket.dev](https://socket.dev/api/badge/npm/package/elegantdb)](https://socket.dev/npm/elegantdb/issues)
 [![CodeQL](https://github.com/Nicat-dcw/elegant.db/actions/workflows/codeql.yml/badge.svg)](https://github.com/Nicat-dcw/elegant.db/actions/workflows/codeql.yml)
 [![NPM](https://img.shields.io/npm/v/elegantdb)]()
+[![Tests](https://github.com/Nicat-dcw/elegant.db/actions/workflows/node.js.yml/badge.svg)](https://github.com/Nicat-dcw/elegant.db/actions/workflows/node.js.yml)
 
 # Elegant Database
 
@@ -47,6 +48,7 @@ const db = new Database({
 - `clone()`: Create a clone of the database instance.
 - `all()`: Get All Data from Adaptor.
 - `getCache()`: Get All Cache from Database
+- `push()`: Pushs data to array.
 
 ## Contributing
 
