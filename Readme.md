@@ -7,7 +7,11 @@
 # Elegant Database
 
 Elegant Database is a JavaScript library that provides advanced features for managing and interacting with a database. It supports both JSON and Elegant (Custom Adaptor of ElegantDB) adaptors for storage.
-
+## Snapshot 2.05.0
+- Faster File handling
+- Rewrite
+- New Adapters
+- Experimental Cache 
 ## Installation
 
 You can install Elegant Database using npm:
